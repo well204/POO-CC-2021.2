@@ -148,8 +148,7 @@ std::string mais_homens_ou_mulheres(std::vector<int> fila){
         if (fila[i] < 0)
         {
             count_women ++;
-        }
-        
+        }  
         
     }
     
@@ -168,6 +167,37 @@ std::string mais_homens_ou_mulheres(std::vector<int> fila){
 
 }
 
+std::string mais_homens_ou_mulheres_estress(std::vector<int> fila){
+    
+    int metade1 = 0;
+    int metade2 = 0;
+    std::string first_half("primeira metade");
+    std::string second_half("segunda metade");
+    std::string empate("empate");
+
+    for (int i = 0; i < fila.size()/2; i++)
+    {
+        metade1 += abs(fila[i]);
+    }
+    for (int i = 0; i < fila.size()*2; i++)
+    {
+        metade2 += abs(fila[i]);
+    }
+    if (metade1 > metade2)
+    {
+        return first_half;
+    }
+    if (metade1 < metade2)
+    {
+        return second_half;
+    }
+    if (metade1 == metade2)
+    {
+        return empate;
+    }
+    
+}
+
 int main(){
     int num_humor = 0;
     int inicio = 0;
@@ -184,6 +214,7 @@ int main(){
     std::cout << procurar_menor_pos_apartir({5, 3, -1, -50, -1, 10},inicio) << '\n';
     std::cout << calcular_stress_medio({5, 3, -1, -50, -1, -99}) << '\n';
     std::cout << mais_homens_ou_mulheres({5, 3, -1, -50, -1, -99}) << '\n';
+    std::cout << mais_homens_ou_mulheres_estress({5, 3, -1, -50, -1, -99});
 
     return 0;
 }
