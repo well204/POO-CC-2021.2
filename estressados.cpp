@@ -1,17 +1,18 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 // BUSCA
 
 bool existe(std::vector<int>fila, int valor) {
 
-    for (int i = 0; i < fila.size(); i++)
-    {
-       if(fila[i] == valor){
-           return true;
-           return false;
-       }
-    }
+  for(int i = 0; i < fila.size(); i++) {
+      if (fila[i] == valor)
+      {
+          return true;
+      }
+      return false;
+  }
 }
 
 int contar(std::vector<int>fila, int valor) {
@@ -105,14 +106,19 @@ int procurar_menor_pos_apartir(std::vector<int> fila, int inicio){
 
 int procurar_melhor_pos_se(std::vector<int> fila){
 
-    int maior = 0;
+    int melhor = 0;
 
     for (int i = 0; i < fila.size(); i++)
     {
-        if(fila[i] < fila[maior] && fila[i] > 0) maior = i;
+        if(fila[i] > 0 && fila[melhor] < fila[i] )
+         {
+             melhor = i;
+             return melhor;
+         }
+        return -1;
     }
     
-    return maior;
+    
 }
 
 // CONTAGEM
@@ -123,7 +129,7 @@ float calcular_stress_medio(std::vector<int> fila){
     float soma = 0;
     for (int i = 0; i < fila.size(); i++)
     {
-        soma += fila[i];
+        soma += abs(fila[i]);
         media ++;
     }
     media = soma/media;
@@ -152,11 +158,11 @@ std::string mais_homens_ou_mulheres(std::vector<int> fila){
         
     }
     
-    if (count_women < count_men)
+    if (count_women > count_men)
     {
         return women;
     }
-    if (count_women > count_men)
+    if (count_women < count_men)
     {
         return men;
     }
@@ -171,8 +177,8 @@ std::string mais_homens_ou_mulheres_estress(std::vector<int> fila){
     
     int metade1 = 0;
     int metade2 = 0;
-    std::string first_half("primeira metade");
-    std::string second_half("segunda metade");
+    std::string first_half("primeira");
+    std::string second_half("segunda");
     std::string empate("empate");
 
     for (int i = 0; i < fila.size()/2; i++)
@@ -206,12 +212,13 @@ int main(){
     std::cin >> inicio;
 
     std::cout << existe({1, 2 ,3, 4, 5},num_humor) << '\n';
-    std::cout << contar({2, 3 ,2, 3}, num_humor) << '\n';
+    std::cout <<contar({-1, -50, -1 -99}, num_humor) << '\n';
     std::cout << procurar_valor({1, 3, 6, 9, 8, -1}, num_humor) << '\n';
     std::cout << procurar_valor_apartir({5, 3, -1, -50, -1, -99},num_humor, inicio) << '\n';
     std::cout << procurar_menor({5, 3, -1, -50, -1, -99}) << '\n';
     std::cout << procurar_menor_pos({5, 3, -1, -50, -1, -99}) << '\n';
     std::cout << procurar_menor_pos_apartir({5, 3, -1, -50, -1, 10},inicio) << '\n';
+    std::cout << procurar_melhor_pos_se({5, 3, -1, -50, -1, -99}) << '\n';
     std::cout << calcular_stress_medio({5, 3, -1, -50, -1, -99}) << '\n';
     std::cout << mais_homens_ou_mulheres({5, 3, -1, -50, -1, -99}) << '\n';
     std::cout << mais_homens_ou_mulheres_estress({5, 3, -1, -50, -1, -99});
