@@ -6,7 +6,7 @@
 
 bool existe(std::vector<int>fila, int valor) {
 
-  for(int i = 0; i < fila.size(); i++) {
+  for(int i = 0; i < (int) fila.size(); i++) {
       if (fila[i] == valor)
       {
           return true;
@@ -19,19 +19,17 @@ int contar(std::vector<int>fila, int valor) {
 
     int conta = 0;
 
-    for(int i = 0; i < fila.size(); i++)
+    for(int i = 0; i < (int) fila.size(); i++)
     {
-        if(fila[i] == valor){
+        if(fila[i] == valor)
             conta ++;
-            
-        }
     }
     return conta;
 }
 
 int procurar_valor(std::vector<int> fila, int x) {
 
-    for(int i = 0; i < fila.size(); i++)
+    for(int i = 0; i < (int) fila.size(); i++)
     {
         if(fila[i] == x){
             return i;    
@@ -43,13 +41,10 @@ int procurar_valor(std::vector<int> fila, int x) {
 
 int procurar_valor_apartir(std::vector<int> fila, int x, int inicio) {
     
-    for (int i = inicio; i < fila.size(); i++)
+    for (int i = inicio; i < (int) fila.size(); i++)
     {
         if (fila[i] == x)
-        {
             return i;
-        }
-        
     }
     
 }
@@ -60,13 +55,10 @@ int procurar_menor(std::vector<int> fila){
 
     int menor = fila[0];
 
-    for (int i = 0; i < fila.size(); ++i)
+    for (int i = 0; i < (int) fila.size(); ++i)
     {
         if(fila[i] < menor)
-        {
             menor = fila[i];
-            
-        }
     }
 
     return menor;
@@ -76,13 +68,10 @@ int procurar_menor_pos(std::vector<int> fila){
  
     int menor = 0; 
  
-    for (int i = 0; i < fila.size(); i++) 
+    for (int i = 0; i < (int) fila.size(); i++) 
     { 
         if(fila[i] < fila[menor]) 
-        { 
             menor = i; 
-         
-        } 
     } 
  
     return menor; 
@@ -92,13 +81,10 @@ int procurar_menor_pos_apartir(std::vector<int> fila, int inicio){
 
     int menor = 0; 
  
-    for (int i = inicio; i < fila.size(); i++) 
+    for (int i = inicio; i < (int) fila.size(); i++) 
     { 
         if(fila[i] < fila[menor]) 
-        { 
             menor = i; 
-         
-        } 
     } 
  
     return menor; 
@@ -106,19 +92,15 @@ int procurar_menor_pos_apartir(std::vector<int> fila, int inicio){
 
 int procurar_melhor_pos_se(std::vector<int> fila){
 
-    int melhor = 0;
+    int melhor = -1;
 
-    for (int i = 0; i < fila.size(); i++)
+    for (int i = 0; i < (int) fila.size(); i++)
     {
-        if(fila[i] > 0 && fila[melhor] < fila[i] )
-         {
+        if(fila[i] > 0 && (melhor == -1 || fila[i] < fila[melhor]) )
              melhor = i;
-             return melhor;
-         }
-        return -1;
     }
-    
-    
+
+    return melhor;
 }
 
 // CONTAGEM
@@ -127,7 +109,7 @@ float calcular_stress_medio(std::vector<int> fila){
 
     float media = 0;
     float soma = 0;
-    for (int i = 0; i < fila.size(); i++)
+    for (int i = 0; i < (int) fila.size(); i++)
     {
         soma += abs(fila[i]);
         media ++;
@@ -144,36 +126,26 @@ std::string mais_homens_ou_mulheres(std::vector<int> fila){
     std::string women("mulheres");
     std::string empate("empate");
 
-    for (int i = 0; i < fila.size(); i++)
+    for (int i = 0; i < (int) fila.size(); i++)
     {
         if (fila[i] > 0)
-        {
             count_men ++;
-        }
 
         if (fila[i] < 0)
-        {
             count_women ++;
-        }  
-        
     }
     
     if (count_women > count_men)
-    {
         return women;
-    }
-    if (count_women < count_men)
-    {
-        return men;
-    }
-    if (count_women == count_men)
-    {
-        return empate;
-    }
 
+    if (count_women < count_men)
+        return men;
+    
+    if (count_women == count_men)
+        return empate;
 }
 
-std::string mais_homens_ou_mulheres_estress(std::vector<int> fila){
+std::string mais_homens_ou_mulheres_estress(std::vector<int> fila) {
     
     int metade1 = 0;
     int metade2 = 0;
@@ -181,26 +153,25 @@ std::string mais_homens_ou_mulheres_estress(std::vector<int> fila){
     std::string second_half("segunda");
     std::string empate("empate");
 
-    for (int i = 0; i < fila.size()/2; i++)
-    {
+    for (int i = 0; i < (int) fila.size()/2; i++)
         metade1 += abs(fila[i]);
-    }
+    
     for (int i = 0; i < fila.size()*2; i++)
-    {
         metade2 += abs(fila[i]);
-    }
+
     if (metade1 > metade2)
-    {
         return first_half;
-    }
+
     if (metade1 < metade2)
-    {
         return second_half;
-    }
+
     if (metade1 == metade2)
-    {
-        return empate;
-    }
+        return empate; 
+}
+
+//FILTER
+
+std::vector<int> clone(const std::vector<int>& v) { 
     
 }
 
